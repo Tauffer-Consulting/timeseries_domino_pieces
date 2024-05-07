@@ -10,6 +10,6 @@
             "ProphetPredictPiece"
         ],
         "secrets": [],
-        "source_image": "ghcr.io/tauffer-consulting/timeseries_domino_pieces:development-group0"
+        "source_image": "ghcr.io/tauffer-consulting/timeseries_domino_pieces:0.1.0-group0"
     }
 }
