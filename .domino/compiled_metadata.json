@@ -110,14 +110,14 @@
         },
         "output_schema": {
             "properties": {
-                "model_file_path": {
+                "prophet_model_file_path": {
                     "description": "Path to the file containing the trained model.",
-                    "title": "Model File Path",
+                    "title": "Prophet model path",
                     "type": "string"
                 }
             },
             "required": [
-                "model_file_path"
+                "prophet_model_file_path"
             ],
             "title": "OutputModel",
             "type": "object"
@@ -236,9 +236,9 @@
         },
         "input_schema": {
             "properties": {
-                "model_path": {
+                "prophet_model_path": {
                     "description": "Path to the file containing the trained model.",
-                    "title": "Model Path",
+                    "title": "Prophet Model Path",
                     "type": "string"
                 },
                 "periods": {
@@ -248,7 +248,7 @@
                 }
             },
             "required": [
-                "model_path",
+                "prophet_model_path",
                 "periods"
             ],
             "title": "InputModel",
