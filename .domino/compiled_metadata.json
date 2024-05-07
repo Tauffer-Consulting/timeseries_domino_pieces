@@ -1,6 +1,131 @@
 {
-    "ExampleSimplePiece": {
-        "name": "ExampleSimplePiece",
+    "ProphetTrainModelPiece": {
+        "name": "ProphetTrainModelPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "Prophet"
+        ],
+        "style": {
+            "node_label": "Prophet Train",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#ebebeb"
+            },
+            "useIcon": true,
+            "icon_class_name": "icon-park-outline:robot-one",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Piece to train a prophet model",
+        "container_resources": {
+            "requests": {
+                "cpu": 100,
+                "memory": 128
+            },
+            "limits": {
+                "cpu": 500,
+                "memory": 512
+            }
+        },
+        "input_schema": {
+            "$defs": {
+                "GrowthTrend": {
+                    "enum": [
+                        "linear",
+                        "logistic",
+                        "flat"
+                    ],
+                    "title": "GrowthTrend",
+                    "type": "string"
+                },
+                "SeasonalityMode": {
+                    "enum": [
+                        "additive",
+                        "multiplicative"
+                    ],
+                    "title": "SeasonalityMode",
+                    "type": "string"
+                }
+            },
+            "properties": {
+                "input_data_file": {
+                    "description": "Path to the input data file. Accepted formats: `.csv`, `.json`. Should use the following format: `ds` (datetime), `y` (target).",
+                    "title": "Input Data File",
+                    "type": "string"
+                },
+                "growth_trend": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/GrowthTrend"
+                        }
+                    ],
+                    "default": "linear",
+                    "description": "The growth trend of the data. Options are `linear`, `logistic` and `flat`. Default is `linear`."
+                },
+                "changepoints": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "description": "List of dates at which to include potential changepoints. If not specified, potential changepoints are selected automatically.",
+                    "title": "Changepoints"
+                },
+                "n_changepoints": {
+                    "default": 25,
+                    "description": " Number of potential changepoints to include. Not used if input `changepoints` is supplied.",
+                    "maximum": 1000,
+                    "minimum": 0,
+                    "title": "N Changepoints",
+                    "type": "integer"
+                },
+                "seasonality_mode": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/SeasonalityMode"
+                        }
+                    ],
+                    "default": "additive",
+                    "description": "The seasonality mode of the data. Options are `additive` and `multiplicative`. Default is `additive`."
+                }
+            },
+            "required": [
+                "input_data_file"
+            ],
+            "title": "InputModel",
+            "type": "object"
+        },
+        "output_schema": {
+            "properties": {
+                "prophet_model_file_path": {
+                    "description": "Path to the file containing the trained model.",
+                    "title": "Prophet model path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "prophet_model_file_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/timeseries_domino_pieces/tree/main/pieces/ProphetTrainModelPiece"
+    },
+    "GetYahooFinanceDataPiece": {
+        "name": "GetYahooFinanceDataPiece",
         "dependency": {
             "dockerfile": null,
             "requirements_file": "requirements_0.txt"
@@ -9,102 +134,146 @@
             "Example"
         ],
         "style": {
-            "node_label": "Simple Piece",
+            "node_label": "Get Yahoo Finance Data",
             "node_type": "default",
             "node_style": {
                 "backgroundColor": "#ebebeb"
             },
             "useIcon": true,
-            "icon_class_name": "fas fa-database",
+            "icon_class_name": "fa-solid:database",
             "iconStyle": {
                 "cursor": "pointer"
             }
         },
-        "description": "This is an example of a simple Domino Piece",
+        "description": "This piece gets data from Yahoo Finance.",
         "container_resources": {
             "requests": {
-                "cpu": "100m",
-                "memory": "128Mi"
+                "cpu": 100,
+                "memory": 128
             },
             "limits": {
-                "cpu": "500m",
-                "memory": "512Mi"
+                "cpu": 500,
+                "memory": 512
             }
         },
         "input_schema": {
-            "title": "InputModel",
-            "type": "object",
             "properties": {
-                "distribution_name": {
-                    "description": "Name of the distribution to sample from",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/DistributionType"
-                        }
-                    ]
+                "ticker": {
+                    "description": "Ticker of the stock to get data from.",
+                    "title": "Ticker",
+                    "type": "string"
                 },
-                "distribution_mean": {
-                    "title": "Distribution Mean",
-                    "description": "Distribution mean",
-                    "type": "number"
+                "start_date": {
+                    "description": "Start date of the data to get.",
+                    "format": "date",
+                    "title": "Start Date",
+                    "type": "string"
                 },
-                "distribution_sd": {
-                    "title": "Distribution Sd",
-                    "description": "Distribution standard deviation",
-                    "default": 1.0,
-                    "exclusiveMinimum": 0.0,
-                    "type": "number"
+                "end_date": {
+                    "description": "End date of the data to get.",
+                    "format": "date",
+                    "title": "End Date",
+                    "type": "string"
                 }
             },
             "required": [
-                "distribution_name",
-                "distribution_mean"
+                "ticker",
+                "start_date",
+                "end_date"
             ],
-            "definitions": {
-                "DistributionType": {
-                    "title": "DistributionType",
-                    "description": "An enumeration.",
-                    "enum": [
-                        "gaussian",
-                        "poisson"
-                    ],
-                    "type": "string"
-                }
-            }
+            "title": "InputModel",
+            "type": "object"
         },
         "output_schema": {
-            "title": "OutputModel",
-            "type": "object",
             "properties": {
-                "message": {
-                    "title": "Message",
-                    "description": "Output message to log",
+                "data_path": {
+                    "description": "Path to the file containing the trained model.",
+                    "title": "Data Path",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "data_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/timeseries_domino_pieces/tree/main/pieces/GetYahooFinanceDataPiece"
+    },
+    "ProphetPredictPiece": {
+        "name": "ProphetPredictPiece",
+        "dependency": {
+            "dockerfile": null,
+            "requirements_file": "requirements_0.txt"
+        },
+        "tags": [
+            "Prophet"
+        ],
+        "style": {
+            "node_label": "Prophet Predict",
+            "node_type": "default",
+            "node_style": {
+                "backgroundColor": "#ebebeb"
+            },
+            "useIcon": true,
+            "icon_class_name": "icon-park-outline:robot-one",
+            "iconStyle": {
+                "cursor": "pointer"
+            }
+        },
+        "description": "Piece to predict using Prophet",
+        "container_resources": {
+            "requests": {
+                "cpu": 100,
+                "memory": 128
+            },
+            "limits": {
+                "cpu": 500,
+                "memory": 512
+            }
+        },
+        "input_schema": {
+            "properties": {
+                "prophet_model_path": {
+                    "description": "Path to the file containing the trained model.",
+                    "title": "Prophet Model Path",
                     "type": "string"
                 },
-                "sample_result": {
-                    "title": "Sample Result",
-                    "description": "The result of this Piece's processing",
-                    "type": "string"
+                "periods": {
+                    "description": "Number of periods to forecast.",
+                    "title": "Periods",
+                    "type": "integer"
                 }
             },
             "required": [
-                "message",
-                "sample_result"
-            ]
+                "prophet_model_path",
+                "periods"
+            ],
+            "title": "InputModel",
+            "type": "object"
         },
-        "secrets_schema": {
-            "title": "SecretsModel",
-            "type": "object",
+        "output_schema": {
             "properties": {
-                "EXAMPLE_OPERATOR_SECRET_1": {
-                    "title": "Example Operator Secret 1",
-                    "description": "A secret necessary to run this Piece",
+                "forecast_data_path": {
+                    "description": "Path to the file containing the forecast data.",
+                    "title": "Forecast Data Path",
+                    "type": "string"
+                },
+                "forecast_figure_path": {
+                    "description": "Path to the file containing the results figure.",
+                    "title": "Forecast Figure Path",
                     "type": "string"
                 }
             },
             "required": [
-                "EXAMPLE_OPERATOR_SECRET_1"
-            ]
-        }
+                "forecast_data_path",
+                "forecast_figure_path"
+            ],
+            "title": "OutputModel",
+            "type": "object"
+        },
+        "secrets_schema": null,
+        "source_url": "https://github.com/Tauffer-Consulting/timeseries_domino_pieces/tree/main/pieces/ProphetPredictPiece"
     }
 }

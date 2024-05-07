@@ -1,0 +1,24 @@
+{
+    "name": "ProphetTrainModelPiece",
+    "description": "Piece to train a prophet model",
+    "dependency": {
+        "requirements_file": "requirements_0.txt"
+    },
+    "container_resources": {
+        "requests": {
+            "cpu": 100,
+            "memory": 128
+        },
+        "limits": {
+            "cpu": 500,
+            "memory": 512
+        }
+    },
+    "tags": [
+        "Prophet"
+    ],
+    "style": {
+        "node_label": "Prophet Train",
+        "icon_class_name": "icon-park-outline:robot-one"
+    }
+}
