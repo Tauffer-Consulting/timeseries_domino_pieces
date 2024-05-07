@@ -53,7 +53,8 @@ class InputModel(BaseModel):
 
 
 class OutputModel(BaseModel):
-    model_file_path: str = Field(
+    prophet_model_file_path: str = Field(
+        title='Prophet model path',
         description="Path to the file containing the trained model."
     )
     # results_figure_file_path: str = Field(

@@ -5,8 +5,8 @@ from datetime import date
 
 
 class InputModel(BaseModel):
-    model_path: str = Field(
-        title="Model Path",
+    prophet_model_path: str = Field(
+        title="Prophet Model Path",
         description="Path to the file containing the trained model."
     )
     periods: int = Field(

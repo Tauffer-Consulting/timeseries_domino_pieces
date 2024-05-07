@@ -14,7 +14,7 @@ class ProphetPredictPiece(BasePiece):
     """
     def piece_function(self, input_data: InputModel):
 
-        with open(input_data.model_path, "rb") as f:
+        with open(input_data.prophet_model_path, "rb") as f:
             model = pickle.load(f)
 
         future = model.make_future_dataframe(periods=input_data.periods)
