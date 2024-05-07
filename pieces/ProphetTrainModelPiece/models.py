@@ -20,18 +20,6 @@ class InputModel(BaseModel):
         title="Input Data File",
         description="Path to the input data file. Accepted formats: `.csv`, `.json`. Should use the following format: `ds` (datetime), `y` (target).",
     )
-    # datetime_column_name: str = Field(
-    #     description="Name of the column containing the datetime values."
-    # )
-    # target_column_name: str = Field(
-    #     description="Name of the column containing the target values."
-    # )
-    test_set_percentage: float = Field(
-        default=20.0,
-        ge=1,
-        le=90,
-        description="Percentage of the data to use as test set. Default is 20%."
-    )
     growth_trend: GrowthTrend = Field(
         default=GrowthTrend.linear,
         description="The growth trend of the data. Options are `linear`, `logistic` and `flat`. Default is `linear`."

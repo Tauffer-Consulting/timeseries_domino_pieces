@@ -20,7 +20,12 @@ class ProphetTrainModelPiece(BasePiece):
         else:
             raise ValueError("File format not supported. Please pass a CSV or JSON file.")
 
-        model = Prophet()
+        model = Prophet(
+            seasonality_mode=input_data.seasonality_mode,
+            growth=input_data.growth_trend,
+            changepoints=input_data.changepoints,
+            n_changepoints=input_data.n_changepoints
+        )
         model.fit(df)
 
         # Serialize model
