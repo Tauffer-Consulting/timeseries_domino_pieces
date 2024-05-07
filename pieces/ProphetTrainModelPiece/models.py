@@ -25,7 +25,7 @@ class InputModel(BaseModel):
         description="The growth trend of the data. Options are `linear`, `logistic` and `flat`. Default is `linear`."
     )
     changepoints: List[date] = Field(
-        default=[],
+        default=None,
         description="List of dates at which to include potential changepoints. If not specified, potential changepoints are selected automatically."
     )
     n_changepoints: int = Field(
