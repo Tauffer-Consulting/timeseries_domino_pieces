@@ -57,14 +57,6 @@
                     "title": "Input Data File",
                     "type": "string"
                 },
-                "test_set_percentage": {
-                    "default": 20.0,
-                    "description": "Percentage of the data to use as test set. Default is 20%.",
-                    "maximum": 90.0,
-                    "minimum": 1.0,
-                    "title": "Test Set Percentage",
-                    "type": "number"
-                },
                 "growth_trend": {
                     "allOf": [
                         {
