@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from enum import Enum
-from typing import List
+from typing import List, Optional
 from datetime import date
 
 
@@ -24,7 +24,7 @@ class InputModel(BaseModel):
         default=GrowthTrend.linear,
         description="The growth trend of the data. Options are `linear`, `logistic` and `flat`. Default is `linear`."
     )
-    changepoints: List[date] = Field(
+    changepoints: Optional[List[date]] = Field(
         default=None,
         description="List of dates at which to include potential changepoints. If not specified, potential changepoints are selected automatically."
     )
