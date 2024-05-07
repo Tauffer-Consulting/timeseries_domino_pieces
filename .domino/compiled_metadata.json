@@ -67,14 +67,21 @@
                     "description": "The growth trend of the data. Options are `linear`, `logistic` and `flat`. Default is `linear`."
                 },
                 "changepoints": {
-                    "default": [],
+                    "anyOf": [
+                        {
+                            "items": {
+                                "format": "date",
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
                     "description": "List of dates at which to include potential changepoints. If not specified, potential changepoints are selected automatically.",
-                    "items": {
-                        "format": "date",
-                        "type": "string"
-                    },
-                    "title": "Changepoints",
-                    "type": "array"
+                    "title": "Changepoints"
                 },
                 "n_changepoints": {
                     "default": 25,
