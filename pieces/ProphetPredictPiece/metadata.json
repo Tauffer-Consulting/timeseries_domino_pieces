@@ -19,6 +19,6 @@
     ],
     "style": {
         "node_label": "Prophet Predict",
-        "icon_class_name": "fa-solid:database"
+        "icon_class_name": "icon-park-outline:robot-one"
     }
 }
