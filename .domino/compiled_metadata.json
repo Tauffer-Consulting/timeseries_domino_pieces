@@ -15,7 +15,7 @@
                 "backgroundColor": "#ebebeb"
             },
             "useIcon": true,
-            "icon_class_name": "fa-solid:database",
+            "icon_class_name": "icon-park-outline:robot-one",
             "iconStyle": {
                 "cursor": "pointer"
             }
@@ -218,7 +218,7 @@
                 "backgroundColor": "#ebebeb"
             },
             "useIcon": true,
-            "icon_class_name": "fa-solid:database",
+            "icon_class_name": "icon-park-outline:robot-one",
             "iconStyle": {
                 "cursor": "pointer"
             }
