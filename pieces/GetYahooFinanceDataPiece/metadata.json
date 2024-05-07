@@ -1,6 +1,6 @@
 {
-    "name": "ProphetTrainModelPiece",
-    "description": "Piece to train a prophet model",
+    "name": "GetYahooFinanceDataPiece",
+    "description": "This piece gets data from Yahoo Finance.",
     "dependency": {
         "requirements_file": "requirements_0.txt"
     },
@@ -15,10 +15,10 @@
         }
     },
     "tags": [
-        "Prophet"
+        "Example"
     ],
     "style": {
-        "node_label": "Prophet Train",
+        "node_label": "Get Yahoo Finance Data",
         "icon_class_name": "fa-solid:database"
     }
 }

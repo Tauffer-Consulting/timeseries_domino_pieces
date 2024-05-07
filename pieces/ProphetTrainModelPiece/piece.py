@@ -2,9 +2,8 @@ from domino.base_piece import BasePiece
 from .models import InputModel, OutputModel
 import pandas as pd
 from prophet import Prophet
-from prophet.serialize import model_to_json
-import plotly.graph_objs as go
-
+import pickle
+from pathlib import Path
 
 class ProphetTrainModelPiece(BasePiece):
     """
@@ -21,9 +20,14 @@ class ProphetTrainModelPiece(BasePiece):
         else:
             raise ValueError("File format not supported. Please pass a CSV or JSON file.")
 
+        model = Prophet()
+        model.fit(df)
 
+        # Serialize model
+        model_file_path = self.results_path / "prophet_model.json"
+        with open(str(model_file_path), "wb") as f:
+            pickle.dump(model, f)
 
         return OutputModel(
-            model_file_path=,
-            results_figure_file_path=
+            model_file_path=str(model_file_path),
         )

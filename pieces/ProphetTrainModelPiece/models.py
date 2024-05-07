@@ -17,14 +17,15 @@ class SeasonalityMode(str, Enum):
 
 class InputModel(BaseModel):
     input_data_file: str = Field(
-        description="Path to the input data file. Accepted formats: `.csv`, `.json`."
+        title="Input Data File",
+        description="Path to the input data file. Accepted formats: `.csv`, `.json`. Should use the following format: `ds` (datetime), `y` (target).",
     )
-    datetime_column_name: str = Field(
-        description="Name of the column containing the datetime values."
-    )
-    target_column_name: str = Field(
-        description="Name of the column containing the target values."
-    )
+    # datetime_column_name: str = Field(
+    #     description="Name of the column containing the datetime values."
+    # )
+    # target_column_name: str = Field(
+    #     description="Name of the column containing the target values."
+    # )
     test_set_percentage: float = Field(
         default=20.0,
         ge=1,
@@ -55,6 +56,6 @@ class OutputModel(BaseModel):
     model_file_path: str = Field(
         description="Path to the file containing the trained model."
     )
-    results_figure_file_path: str = Field(
-        description="Path to the file containing the results figure."
-    )
+    # results_figure_file_path: str = Field(
+    #     description="Path to the file containing the results figure."
+    # )

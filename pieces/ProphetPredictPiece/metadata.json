@@ -1,6 +1,6 @@
 {
-    "name": "ProphetTrainModelPiece",
-    "description": "Piece to train a prophet model",
+    "name": "ProphetPredictPiece",
+    "description": "Piece to predict using Prophet",
     "dependency": {
         "requirements_file": "requirements_0.txt"
     },
@@ -18,7 +18,7 @@
         "Prophet"
     ],
     "style": {
-        "node_label": "Prophet Train",
+        "node_label": "Prophet Predict",
         "icon_class_name": "fa-solid:database"
     }
 }
